@@ -1,6 +1,6 @@
 terraform {
  backend "gcs" {
    bucket  = "corpnavi-terraform-admin"
-   prefix  = "terraform/stg/state"
+   prefix  = "terraform/internal/state"
  }
 }
