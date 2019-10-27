@@ -7,7 +7,7 @@ variable "credentials" {
 variable "host_project_name" {
   type = "string"
   description = "The name of the host project"
-  default = "arbitera-stg"
+  default = "arbitera-internal"
 }
 
 variable "billing_account" {
@@ -38,6 +38,7 @@ variable "project_services" {
     "iam.googleapis.com",
     "servicenetworking.googleapis.com",
     "compute.googleapis.com",
+    "containerregistry.googleapis.com",
     "container.googleapis.com",
   ]
 }
@@ -55,5 +56,5 @@ variable "public_restricted_whitelist" {
 variable "vpc_cidr_secondary" {
   type = "string"
   description = "The CIDR block for the VPC secondary range. Must not overlap with stg or prod subnet range."
-  default = "10.1.0.0/16"
+  default = "10.4.0.0/16"
 }
