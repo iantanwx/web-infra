@@ -1,15 +1,15 @@
 module "jump_box" {
-  source = "../../modules/network/modules/bastion-host"
-  project = google_project.project.project_id
+  source        = "../../modules/network/modules/bastion-host"
+  project       = google_project.project.project_id
   instance_name = "${var.host_project_name}-jump-box"
-  subnetwork = module.internal_vpc.public_subnetwork
-  zone = "asia-southeast1-a"
-  tag = "public-restricted"
+  subnetwork    = module.internal_vpc.public_subnetwork
+  zone          = "asia-southeast1-a"
+  tag           = "public-restricted"
 }
 
 resource "google_compute_address" "jump_box_ip" {
-  name = "${var.host_project_name}-jump-box-ip"
-  project = google_project.project.project_id
+  name         = "${var.host_project_name}-jump-box-ip"
+  project      = google_project.project.project_id
   address_type = "EXTERNAL"
 }
 

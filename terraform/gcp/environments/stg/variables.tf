@@ -1,35 +1,35 @@
 variable "credentials" {
-  type = "string"
+  type        = "string"
   description = "Path to the GCP credentials to be used for deploying this environment"
-  default = "~/.config/gcloud/corpnavi-terraform-admin.json"
+  default     = "~/.config/gcloud/corpnavi-terraform-admin.json"
 }
 
 variable "host_project_name" {
-  type = "string"
+  type        = "string"
   description = "The name of the host project"
-  default = "arbitera-stg"
+  default     = "arbitera-stg"
 }
 
 variable "billing_account" {
-  type = "string"
+  type        = "string"
   description = "Billing account for the host project. Should not change."
-  default = "01E24F-901626-0E053A"
+  default     = "01E24F-901626-0E053A"
 }
 
 variable "org_id" {
-  type = "string"
+  type        = "string"
   description = "Arbitera top-level organisation ID. Should not change."
-  default = "222608296210"
+  default     = "222608296210"
 }
 
 variable "region" {
-  type = "string"
+  type        = "string"
   description = "Host project region"
-  default = "asia-southeast1"
+  default     = "asia-southeast1"
 }
 
 variable "project_services" {
-  type = list(string)
+  type        = list(string)
   description = "The services and APIs to enable for the host project. Defaults to minimal viable set for an Arbitera app environment."
   default = [
     "cloudresourcemanager.googleapis.com",
@@ -43,7 +43,7 @@ variable "project_services" {
 }
 
 variable "public_restricted_whitelist" {
-  type = list(string)
+  type        = list(string)
   description = "A list of CIDR blocks from the public internet permitted to reach resources tagged public-restricted."
   default = [
     # IT's home IP.
@@ -53,7 +53,7 @@ variable "public_restricted_whitelist" {
 }
 
 variable "vpc_cidr_secondary" {
-  type = "string"
+  type        = "string"
   description = "The CIDR block for the VPC secondary range. Must not overlap with stg or prod subnet range."
-  default = "10.1.0.0/16"
+  default     = "10.1.0.0/16"
 }
