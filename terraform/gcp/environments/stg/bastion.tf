@@ -5,6 +5,7 @@ module "jump_box" {
   subnetwork    = module.stg_app_vpc.public_subnetwork
   zone          = "asia-southeast1-a"
   tag           = "public-restricted"
+  static_ip     = google_compute_address.jump_box_ip.address
 }
 
 resource "google_compute_address" "jump_box_ip" {

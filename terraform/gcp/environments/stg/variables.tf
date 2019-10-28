@@ -57,3 +57,11 @@ variable "vpc_cidr_secondary" {
   description = "The CIDR block for the VPC secondary range. Must not overlap with stg or prod subnet range."
   default     = "10.1.0.0/16"
 }
+
+variable "oslogin_users" {
+  type        = list(string)
+  description = "Users/service accounts that should be given oslogin role"
+  default = [
+    "user:ian@corpnavi.com"
+  ]
+}

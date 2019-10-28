@@ -23,6 +23,12 @@ resource "google_project_service" "service_apis" {
   disable_on_destroy         = true
 }
 
+resource "google_compute_project_metadata_item" "enable_oslogin" {
+  project = google_project.project.project_id
+  key     = "enable-oslogin"
+  value   = "TRUE"
+}
+
 output "project_id" {
   value = google_project.project.project_id
 }
