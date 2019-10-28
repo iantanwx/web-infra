@@ -30,6 +30,13 @@ resource "google_compute_instance" "bastion_host" {
     }
   }
 
+  allow_stopping_for_update = var.allow_stopping_for_update
+
+  service_account {
+    email = var.service_account_email
+    scopes = var.service_account_scopes
+  }
+
   metadata_startup_script = var.startup_script
 
   metadata = {

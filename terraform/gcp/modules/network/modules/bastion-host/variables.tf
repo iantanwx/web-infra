@@ -57,3 +57,21 @@ variable "static_ip" {
   type        = string
   default     = null
 }
+
+variable "allow_stopping_for_update" {
+  description = "Whether to allow bastion host to stop for updates"
+  type = bool
+  default = true
+}
+
+variable "service_account_email" {
+  description = "Service account email to attach to the jump box"
+  type        = string
+  default     = null
+}
+
+variable "service_account_scopes" {
+  description = "Scopes to attach to the service account of the jump box"
+  type        = list(string)
+  default     = []
+}

@@ -6,6 +6,8 @@ module "jump_box" {
   zone          = "asia-southeast1-a"
   tag           = "public-restricted"
   static_ip     = google_compute_address.jump_box_ip.address
+  startup_script = file("${path.module}/files/bastion-startup.sh")
+  service_account_email = google_service_account.k8s_admin.email
 }
 
 resource "google_compute_address" "jump_box_ip" {
