@@ -33,7 +33,3 @@ resource "google_compute_project_metadata_item" "enable_oslogin" {
   key     = "enable-oslogin"
   value   = "TRUE"
 }
-
-output "project_id" {
-  value = google_project.project.project_id
-}

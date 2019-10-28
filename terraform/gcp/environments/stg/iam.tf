@@ -9,8 +9,8 @@ module "oslogin_bindings" {
 }
 
 resource "google_service_account" "k8s_admin" {
-  project = google_project.project.project_id
-  account_id = "k8s-admin"
+  project      = google_project.project.project_id
+  account_id   = "k8s-admin"
   display_name = "Kubernetes administrator"
 }
 

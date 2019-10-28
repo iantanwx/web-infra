@@ -60,8 +60,8 @@ variable "static_ip" {
 
 variable "allow_stopping_for_update" {
   description = "Whether to allow bastion host to stop for updates"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "service_account_email" {

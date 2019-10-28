@@ -81,8 +81,7 @@ resource "google_container_node_pool" "node_pool" {
 
 # GCP service account for use by and attached to worker nodes
 module "gke_service_account" {
-  source = "../../modules/gke/modules/gke-service-account"
-
+  source      = "../../modules/gke/modules/gke-service-account"
   name        = var.cluster_service_account_name
   project     = google_project.project.project_id
   description = var.cluster_service_account_description
