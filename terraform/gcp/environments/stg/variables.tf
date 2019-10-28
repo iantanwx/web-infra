@@ -52,10 +52,16 @@ variable "public_restricted_whitelist" {
   ]
 }
 
+variable "vpc_cidr_primary" {
+  type        = "string"
+  description = "The CIDR block for the VPC secondary range. Must not overlap with internal or prod subnet range."
+  default     = "10.4.0.0/16"
+}
+
 variable "vpc_cidr_secondary" {
   type        = "string"
-  description = "The CIDR block for the VPC secondary range. Must not overlap with stg or prod subnet range."
-  default     = "10.1.0.0/16"
+  description = "The CIDR block for the VPC secondary range. Must not overlap with internal or prod subnet range."
+  default     = "10.5.0.0/16"
 }
 
 variable "oslogin_users" {
@@ -64,4 +70,51 @@ variable "oslogin_users" {
   default = [
     "user:ian@corpnavi.com"
   ]
+}
+
+# k8s variables
+variable "cluster_name" {
+  type        = "string"
+  description = "Name of the GKE cluster"
+  default     = "arbitera-k8s-stg"
+}
+
+variable "master_cidr_block" {
+  description = "The IP range in CIDR notation (size must be /28) to use for the hosted master network. This range will be used for assigning internal IP addresses to the master or set of masters, as well as the ILB VIP. This range must not overlap with any other ranges in use within the cluster's network."
+  type        = string
+  default     = "10.6.0.0/28"
+}
+
+variable "cluster_service_account_name" {
+  default = "arbitera-stg-sa"
+}
+
+variable "cluster_service_account_description" {
+  description = "A description of the custom service account used for the GKE cluster."
+  type        = string
+  default     = "Example GKE Cluster Service Account managed by Terraform"
+}
+
+variable "k8s_initial_node_count" {
+  type        = number
+  description = "Initial number of worker nodes the cluster should start with"
+  default     = 1
+}
+
+variable "k8s_min_node_count" {
+  type        = number
+  description = "Minimum number of nodes that should be in the cluster"
+  default     = 1
+}
+
+variable "k8s_max_node_count" {
+  type        = number
+  description = "Maximum number of nodes that should be in the cluster"
+  default     = 3
+}
+
+variable "k8s_worker_disk_size" {
+  type        = number
+  description = "Worker node disk size in gb"
+  default     = 100
 }

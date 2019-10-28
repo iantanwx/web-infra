@@ -3,6 +3,11 @@ provider "google" {
   credentials = var.credentials
 }
 
+provider "google-beta" {
+  region      = var.region
+  credentials = var.credentials
+}
+
 resource "random_id" "id" {
   byte_length = 4
   prefix      = "${var.host_project_name}-"

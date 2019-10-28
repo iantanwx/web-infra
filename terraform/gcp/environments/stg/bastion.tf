@@ -13,7 +13,3 @@ resource "google_compute_address" "jump_box_ip" {
   project      = google_project.project.project_id
   address_type = "EXTERNAL"
 }
-
-output "jump_box_ip" {
-  value = google_compute_address.jump_box_ip.address
-}
