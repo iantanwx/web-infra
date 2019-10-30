@@ -120,12 +120,12 @@ variable "k8s_worker_disk_size" {
 }
 
 variable "helm_version" {
-  type = string
+  type        = string
   description = "Image version for Tiller"
-  default = "v2.15.2"
+  default     = "v2.15.2"
 }
 
 variable "tiller_namespace" {
-  type = string
+  type    = string
   default = "kube-system"
 }

@@ -1,11 +1,11 @@
 provider "google" {
-  version = "~> 2.18"
+  version     = "~> 2.18"
   region      = var.region
   credentials = var.credentials
 }
 
 provider "google-beta" {
-  version = "~> 2.18"
+  version     = "~> 2.18"
   region      = var.region
   credentials = var.credentials
 }
