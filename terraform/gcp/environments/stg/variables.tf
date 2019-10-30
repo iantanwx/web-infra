@@ -118,3 +118,14 @@ variable "k8s_worker_disk_size" {
   description = "Worker node disk size in gb"
   default     = 100
 }
+
+variable "helm_version" {
+  type = string
+  description = "Image version for Tiller"
+  default = "v2.15.2"
+}
+
+variable "tiller_namespace" {
+  type = string
+  default = "kube-system"
+}
