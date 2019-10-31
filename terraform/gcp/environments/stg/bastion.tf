@@ -8,6 +8,7 @@ module "jump_box" {
   static_ip             = google_compute_address.jump_box_ip.address
   startup_script        = file("${path.module}/../common/files/bastion-startup.sh")
   service_account_email = google_service_account.k8s_admin.email
+  service_account_scopes = ["https://www.googleapis.com/auth/cloud-platform"]
 }
 
 resource "google_compute_address" "jump_box_ip" {

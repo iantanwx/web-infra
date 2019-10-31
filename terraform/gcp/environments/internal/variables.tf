@@ -10,6 +10,18 @@ variable "host_project_name" {
   default     = "arbitera-internal"
 }
 
+variable "stg_project_id" {
+  type = string
+  description = "The project ID of arbitera-stg"
+  default = "arbitera-stg-56516692"
+}
+
+variable "stg_network" {
+  type = string
+  description = "Self link of the staging vpc for peering"
+  default = "https://www.googleapis.com/compute/v1/projects/arbitera-stg-56516692/global/networks/arbitera-stg-network"
+}
+
 variable "billing_account" {
   type        = "string"
   description = "Billing account for the host project. Should not change."

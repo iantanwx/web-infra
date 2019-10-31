@@ -9,3 +9,9 @@ module "internal_vpc" {
   secondary_cidr_block                  = var.vpc_cidr_secondary
   allowed_public_restricted_subnetworks = var.public_restricted_whitelist
 }
+
+resource "google_compute_network_peering" "internal-to-stg" {
+  name         = "internal-to-stg"
+  network      = module.internal_vpc.network
+  peer_network = var.stg_network
+}
