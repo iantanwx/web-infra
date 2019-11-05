@@ -24,6 +24,6 @@ resource "google_service_account" "k8s_admin" {
 
 resource "google_project_iam_member" "k8s_admin" {
   project = var.stg_project_id
-  role = "roles/container.admin"
-  member = "serviceAccount:${google_service_account.k8s_admin.email}"
+  role    = "roles/container.admin"
+  member  = "serviceAccount:${google_service_account.k8s_admin.email}"
 }

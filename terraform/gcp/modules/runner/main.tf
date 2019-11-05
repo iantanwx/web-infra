@@ -1,6 +1,6 @@
 # Create privileged runner instances.
 resource "google_compute_instance" "runner_privileged" {
-  count = var.runner_privileged_count
+  count        = var.runner_privileged_count
   project      = var.gcp_project
   zone         = var.gcp_zone
   name         = "gitlab-ci-runner-${count.index + 1}"

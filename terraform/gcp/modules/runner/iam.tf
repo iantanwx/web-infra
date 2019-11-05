@@ -29,13 +29,13 @@ resource "google_project_iam_member" "runner_gke_admin" {
   count = length(local.gke_master_iam_member_set)
 
   project = local.gke_master_iam_member_set[count.index][0]
-  member = "serviceAccount:${local.gke_master_iam_member_set[count.index][1]}"
-  role = "roles/container.admin"
+  member  = "serviceAccount:${local.gke_master_iam_member_set[count.index][1]}"
+  role    = "roles/container.admin"
 }
 
 # add GCR read/write permissions on the privileged runner service account
 resource "google_project_iam_member" "runner_gcr_admin" {
   project = var.gcp_project
-  member = "serviceAccount:${google_service_account.runner_privileged_sa.email}"
-  role = "roles/storage.admin"
+  member  = "serviceAccount:${google_service_account.runner_privileged_sa.email}"
+  role    = "roles/storage.admin"
 }

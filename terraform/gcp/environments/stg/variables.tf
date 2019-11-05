@@ -11,9 +11,9 @@ variable "host_project_name" {
 }
 
 variable "internal_network" {
-  type = string
+  type        = string
   description = "Self link of the internal vpc for peering"
-  default = "https://www.googleapis.com/compute/v1/projects/arbitera-internal-9c7092e2/global/networks/arbitera-internal-network"
+  default     = "https://www.googleapis.com/compute/v1/projects/arbitera-internal-9c7092e2/global/networks/arbitera-internal-network"
 }
 
 variable "billing_account" {

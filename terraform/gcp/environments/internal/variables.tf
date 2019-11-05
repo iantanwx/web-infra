@@ -11,15 +11,15 @@ variable "host_project_name" {
 }
 
 variable "stg_project_id" {
-  type = string
+  type        = string
   description = "The project ID of arbitera-stg"
-  default = "arbitera-stg-56516692"
+  default     = "arbitera-stg-56516692"
 }
 
 variable "stg_network" {
-  type = string
+  type        = string
   description = "Self link of the staging vpc for peering"
-  default = "https://www.googleapis.com/compute/v1/projects/arbitera-stg-56516692/global/networks/arbitera-stg-network"
+  default     = "https://www.googleapis.com/compute/v1/projects/arbitera-stg-56516692/global/networks/arbitera-stg-network"
 }
 
 variable "billing_account" {

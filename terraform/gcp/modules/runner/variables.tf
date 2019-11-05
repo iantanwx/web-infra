@@ -9,49 +9,49 @@ variable "gcp_zone" {
 }
 
 variable "subnetwork" {
-  type = string
+  type        = string
   description = "The subnetwork to deploy into"
 }
 
 variable "gke_projects" {
-  type = list(string)
+  type        = list(string)
   description = "The GCP projects in which the runner should have GKE master access."
 }
 
 variable "gitlab_url" {
   type        = string
   description = "The URL of the GitLab server hosting the projects to be built."
-  default = "https://gitlab.com"
+  default     = "https://gitlab.com"
 }
 
 variable "docker_version" {
   type        = string
   description = "The docker version to use."
-  default = "18.03.0~ce-0~ubuntu"
+  default     = "18.03.0~ce-0~ubuntu"
 }
 
 variable "runner_privileged_count" {
-  type = number
+  type        = number
   description = "The number of privileged runners to deploy."
-  default = 1
+  default     = 1
 }
 
 variable "runner_privileged_tags" {
-  type = list(string)
+  type        = list(string)
   description = "A list of tags to attach to privileged runners. Used to determine ingress."
-  default = ["public-restricted", "runner-unprivileged"]
+  default     = ["public-restricted", "runner-unprivileged"]
 }
 
 variable "runner_unprivileged_count" {
-  type = number
+  type        = number
   description = "The number of unprivileged runners to deploy."
-  default = 1
+  default     = 1
 }
 
 variable "runner_unprivileged_tags" {
-  type = list(string)
+  type        = list(string)
   description = "A list of tags to attach to privileged runners. Used to determine ingress."
-  default = ["public-protected", "runner-unprivileged"]
+  default     = ["public-protected", "runner-unprivileged"]
 }
 
 variable "runner_token" {
