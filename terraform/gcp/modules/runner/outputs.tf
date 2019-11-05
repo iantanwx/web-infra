@@ -1,21 +1,5 @@
-/**
- * Copyright 2019 Mantel Group Pty Ltd
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-output "ci_worker_service_account" {
-  value       = google_service_account.ci_worker
+output "privileged_sa" {
+  value       = google_service_account.runner_privileged_sa.email
   description = <<EOF
 The service account created for the worker instances.
 Privileges/roles may need to be assigned to this service account depending on the activities
@@ -23,11 +7,11 @@ performed by the build.
 EOF
 }
 
-output "ci_worker_service_account_credentials" {
-  value       = google_service_account.ci_worker
-  description = <<EOF
-The service account created for the worker instances.
-Privileges/roles may need to be assigned to this service account depending on the activities
-performed by the build.
-EOF
+output "unprivileged_sa" {
+  value = google_service_account.runner_unprivileged_sa.email
+}
+
+output "privileged_runner_ip" {
+  value = [google_compute_instance.runner_privileged.*.network_interface]
+  description = "IP addresses of privileged runners"
 }

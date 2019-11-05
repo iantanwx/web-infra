@@ -81,6 +81,6 @@ variable "oslogin_users" {
   type        = list(string)
   description = "Users/service accounts that should be given oslogin role"
   default = [
-    "user:ian@corpnavi.com"
+    "user:ian@corpnavi.com",
   ]
 }

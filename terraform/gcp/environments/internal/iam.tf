@@ -1,7 +1,15 @@
+locals {
+  oslogin_users = [
+    "user:ian@corpnavi.com",
+    "serviceAccount:${module.gitlab_runner.privileged_sa}",
+    "serviceAccount:${module.gitlab_runner.unprivileged_sa}"
+  ]
+}
+
 module "oslogin_bindings" {
   source  = "../../modules/iam/project"
   project = google_project.project.project_id
-  members = var.oslogin_users
+  members = local.oslogin_users
   roles = [
     "roles/iam.serviceAccountUser",
     "roles/compute.osAdminLogin"

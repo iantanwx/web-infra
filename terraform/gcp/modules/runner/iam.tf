@@ -3,7 +3,7 @@
 # - helm on staging/production
 # - push/pull to gcr repositories
 resource "google_service_account" "runner_privileged_sa" {
-  project      = var.runner_project
+  project      = var.gcp_project
   account_id   = "runner-privileged-sa"
   display_name = "Privileged GitLab runner"
 }
@@ -12,7 +12,7 @@ resource "google_service_account" "runner_privileged_sa" {
 # It has permissions for:
 # - helm on staging/production
 resource "google_service_account" "runner_unprivileged_sa" {
-  project      = var.runner_project
+  project      = var.gcp_project
   account_id   = "runner-unprivileged-sa"
   display_name = "Unprivileged GitLab runner"
 }
@@ -20,7 +20,7 @@ resource "google_service_account" "runner_unprivileged_sa" {
 locals {
   gke_master_iam_member_set = setproduct(
     var.gke_projects,
-    [google_service_account.runner_privileged_sa.email, google_service_account.runner_unprivileged_sa],
+    [google_service_account.runner_privileged_sa.email, google_service_account.runner_unprivileged_sa.email],
   )
 }
 
@@ -35,7 +35,7 @@ resource "google_project_iam_member" "runner_gke_admin" {
 
 # add GCR read/write permissions on the privileged runner service account
 resource "google_project_iam_member" "runner_gcr_admin" {
-  project = var.runner_project
+  project = var.gcp_project
   member = "serviceAccount:${google_service_account.runner_privileged_sa.email}"
   role = "roles/storage.admin"
 }
