@@ -12,6 +12,6 @@ output "unprivileged_sa" {
 }
 
 output "privileged_runner_ip" {
-  value       = [google_compute_instance.runner_privileged.*.network_interface]
+  value       = google_compute_instance.runner_privileged.*.network_interface
   description = "IP addresses of privileged runners"
 }

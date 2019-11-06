@@ -84,3 +84,8 @@ variable "oslogin_users" {
     "user:ian@corpnavi.com",
   ]
 }
+
+variable "gitlab_runner_token" {
+  type = string
+  description = "The GitLab runner token."
+}

@@ -42,13 +42,17 @@ sudo apt-get install -y gitlab-runner
 echo "Setting GitLab concurrency"
 sudo sed -i "s/concurrent = .*/concurrent = ${var.runner_concurrency}/" /etc/gitlab-runner/config.toml
 
+echo "Setting up gcloud service account credentials"
+sudo mkdir -p /etc/creds
+echo "${base64decode(google_service_account_key.runner_privileged_sa_key.private_key)}" | sudo tee /etc/creds/gcp_credentials.json 1>/dev/null
+
 echo "Registering GitLab CI runner with GitLab instance."
 sudo gitlab-runner register \
     --non-interactive \
-    --name "${google_compute_instance.runner_privileged[count.index].name}" \
+    --name "gitlab-ci-runner-${count.index + 1}" \
     --url ${var.gitlab_url} \
     --registration-token ${var.runner_token} \
-    --tag-list "${join(",", var.runner_privileged_tags)}"
+    --tag-list "${join(",", var.runner_privileged_tags)}" \
     --executor "docker" \
     --docker-image alpine:latest \
     --docker-privileged \

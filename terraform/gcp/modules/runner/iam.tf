@@ -8,6 +8,10 @@ resource "google_service_account" "runner_privileged_sa" {
   display_name = "Privileged GitLab runner"
 }
 
+resource "google_service_account_key" "runner_privileged_sa_key" {
+  service_account_id = google_service_account.runner_privileged_sa.name
+}
+
 # Service account for unprivileged runners.
 # It has permissions for:
 # - helm on staging/production

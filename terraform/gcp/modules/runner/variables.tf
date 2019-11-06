@@ -27,7 +27,7 @@ variable "gitlab_url" {
 variable "docker_version" {
   type        = string
   description = "The docker version to use."
-  default     = "18.03.0~ce-0~ubuntu"
+  default     = "18.06.3~ce~3-0~ubuntu"
 }
 
 variable "runner_privileged_count" {
@@ -39,7 +39,7 @@ variable "runner_privileged_count" {
 variable "runner_privileged_tags" {
   type        = list(string)
   description = "A list of tags to attach to privileged runners. Used to determine ingress."
-  default     = ["public-restricted", "runner-unprivileged"]
+  default     = ["public-restricted", "runner-privileged"]
 }
 
 variable "runner_unprivileged_count" {
