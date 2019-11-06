@@ -70,3 +70,9 @@ variable "runner_concurrency" {
   default     = 1
   description = "The maximum number of concurrent jobs permitted per runner."
 }
+
+variable "runner_image" {
+  type = string
+  default = "docker:stable"
+  description = "The runner image to use for builds"
+}

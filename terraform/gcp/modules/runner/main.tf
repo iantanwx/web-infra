@@ -39,8 +39,8 @@ echo "Installing GitLab Runner"
 curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
 sudo apt-get install -y gitlab-runner
 
-echo "Setting GitLab concurrency"
-sudo sed -i "s/concurrent = .*/concurrent = ${var.runner_concurrency}/" /etc/gitlab-runner/config.toml
+echo "Setting GitLab runner config"
+echo '${data.template_file.privileged_runner_config.rendered}' | sudo tee /etc/gitlab-runner/config.toml 1>/dev/null
 
 echo "Setting up gcloud service account credentials"
 sudo mkdir -p /etc/creds
@@ -50,11 +50,10 @@ echo "Registering GitLab CI runner with GitLab instance."
 sudo gitlab-runner register \
     --non-interactive \
     --name "gitlab-ci-runner-${count.index + 1}" \
-    --url ${var.gitlab_url} \
-    --registration-token ${var.runner_token} \
+    --url "${var.gitlab_url}" \
+    --registration-token "${var.runner_token}" \
     --tag-list "${join(",", var.runner_privileged_tags)}" \
     --executor "docker" \
-    --docker-image alpine:latest \
     --docker-privileged \
     --run-untagged="true"
 
@@ -68,5 +67,20 @@ SCRIPT
   service_account {
     email  = google_service_account.runner_privileged_sa.email
     scopes = ["cloud-platform"]
+  }
+}
+
+provider "template" {
+  version = "~>2.1"
+}
+
+data "template_file" "privileged_runner_config" {
+  template = file("${path.module}/files/config.tpl")
+  vars = {
+    concurrency = var.runner_concurrency
+    url = var.gitlab_url
+    token = var.runner_token
+    runner_image = var.runner_image
+    privileged = true
   }
 }
