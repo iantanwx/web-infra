@@ -47,7 +47,7 @@ mkdir -p /etc/gcloud
 echo "${base64decode(google_service_account_key.runner_privileged_sa_key.private_key)}" | sudo tee /etc/gcloud/credentials.json 1>/dev/null
 
 echo "Setting up docker login credentials"
-echo "${local.docker_credentials_helper}" | sudo tee /tmp/docker-creds.sh 1> /dev/null
+echo "${data.template_file.docker_credentials_helper.rendered}" | sudo tee /tmp/docker-creds.sh 1> /dev/null
 sudo chmod +x /tmp/docker-creds.sh
 sudo /tmp/docker-creds.sh
 sudo docker-credential-gcr configure-docker
@@ -92,6 +92,10 @@ data "template_file" "privileged_runner_config" {
   }
 }
 
-locals {
-  docker_credentials_helper = file("${path.module}/files/docker-creds.sh")
+data "template_file" "docker_credentials_helper" {
+  template = file("${path.module}/files/docker-creds.sh")
+  vars = {
+    runner_image = var.runner_image
+    privileged = true
+  }
 }
