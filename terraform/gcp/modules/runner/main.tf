@@ -39,21 +39,31 @@ echo "Installing GitLab Runner"
 curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
 sudo apt-get install -y gitlab-runner
 
-echo "Setting GitLab runner config"
-echo '${data.template_file.privileged_runner_config.rendered}' | sudo tee /etc/gitlab-runner/config.toml 1>/dev/null
+echo "Writing GitLab runner template config"
+echo '${data.template_file.privileged_runner_config.rendered}' | sudo tee /tmp/runner_config.template.toml 1> /dev/null
 
-echo "Setting up gcloud service account credentials"
-sudo mkdir -p /etc/creds
-echo "${base64decode(google_service_account_key.runner_privileged_sa_key.private_key)}" | sudo tee /etc/creds/gcp_credentials.json 1>/dev/null
+echo "Copying gcloud service account credentials"
+mkdir -p /etc/gcloud
+echo "${base64decode(google_service_account_key.runner_privileged_sa_key.private_key)}" | sudo tee /etc/gcloud/credentials.json 1>/dev/null
+
+echo "Setting up docker login credentials"
+echo "${local.docker_credentials_helper}" | sudo tee /tmp/docker-creds.sh 1> /dev/null
+sudo chmod +x /tmp/docker-creds.sh
+sudo /tmp/docker-creds.sh
+sudo docker-credential-gcr configure-docker
 
 echo "Registering GitLab CI runner with GitLab instance."
 sudo gitlab-runner register \
+    --template-config  /tmp/runner_config.template.toml \
     --non-interactive \
     --name "gitlab-ci-runner-${count.index + 1}" \
     --url "${var.gitlab_url}" \
     --registration-token "${var.runner_token}" \
     --tag-list "${join(",", var.runner_privileged_tags)}" \
     --executor "docker" \
+    --docker-image "${var.docker_image}" \
+    --docker-volumes "/cache" \
+    --docker-volumes "/etc/gcloud:/root/.config/gcloud:rw" \
     --docker-privileged \
     --run-untagged="true"
 
@@ -77,10 +87,11 @@ provider "template" {
 data "template_file" "privileged_runner_config" {
   template = file("${path.module}/files/config.tpl")
   vars = {
-    concurrency = var.runner_concurrency
-    url = var.gitlab_url
-    token = var.runner_token
     runner_image = var.runner_image
     privileged = true
   }
+}
+
+locals {
+  docker_credentials_helper = file("${path.module}/files/docker-creds.sh")
 }

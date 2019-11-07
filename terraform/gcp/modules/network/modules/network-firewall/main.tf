@@ -15,6 +15,7 @@ data "google_compute_subnetwork" "private_subnetwork" {
 locals {
   public              = "public"
   public_restricted   = "public-restricted"
+  ssh = "ssh"
   private             = "private"
   private_persistence = "private-persistence"
 }
@@ -64,6 +65,29 @@ resource "google_compute_firewall" "public_restricted_allow_inbound" {
   }
 }
 
+# ---------------------------------------------------------------------------------------------------------------------
+# ssh - allow ssh ingress from all sources
+# ---------------------------------------------------------------------------------------------------------------------
+
+resource "google_compute_firewall" "public_allow_ssh" {
+  count = 1
+
+  name = "${var.name_prefix}-allow-ssh-ingress"
+
+  project = var.project
+  network = var.network
+
+  target_tags   = [local.ssh]
+  direction     = "INGRESS"
+  source_ranges = ["0.0.0.0/0"]
+
+  priority = "1010"
+
+  allow {
+    protocol = "tcp"
+    ports = ["22"]
+  }
+}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # private - allow ingress from within this network

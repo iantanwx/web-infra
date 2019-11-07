@@ -30,6 +30,12 @@ variable "docker_version" {
   default     = "18.06.3~ce~3-0~ubuntu"
 }
 
+variable "docker_image" {
+  type = string
+  description = "Default docker image to use for runner jobs"
+  default = "gcr.io/arbitera-internal-9c7092e2/gitlab-runner:0.1.0"
+}
+
 variable "runner_privileged_count" {
   type        = number
   description = "The number of privileged runners to deploy."
@@ -39,7 +45,7 @@ variable "runner_privileged_count" {
 variable "runner_privileged_tags" {
   type        = list(string)
   description = "A list of tags to attach to privileged runners. Used to determine ingress."
-  default     = ["public-restricted", "runner-privileged"]
+  default     = ["ssh", "runner-privileged"]
 }
 
 variable "runner_unprivileged_count" {
@@ -51,7 +57,7 @@ variable "runner_unprivileged_count" {
 variable "runner_unprivileged_tags" {
   type        = list(string)
   description = "A list of tags to attach to privileged runners. Used to determine ingress."
-  default     = ["public-protected", "runner-unprivileged"]
+  default     = ["ssh", "runner-unprivileged"]
 }
 
 variable "runner_token" {
