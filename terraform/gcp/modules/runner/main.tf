@@ -34,6 +34,8 @@ $(lsb_release -cs) \
 stable"
 sudo apt-get update
 sudo apt-get install -y docker-ce=${var.docker_version}
+sudo groupadd docker
+sudo usermod -aG docker $USER
 
 echo "Installing GitLab Runner"
 curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
