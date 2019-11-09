@@ -16,3 +16,8 @@ output "jump_box_ip" {
 output "runner_ips" {
   value = module.gitlab_runner.privileged_runner_ip
 }
+
+# helm repository bucket
+output "helm-repo-bucket" {
+  value = google_storage_bucket.arbitera-helm-repo.name
+}
