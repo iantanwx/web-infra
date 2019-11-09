@@ -68,7 +68,7 @@ variable "runner_token" {
 variable "runner_instance_type" {
   type        = string
   description = "The size of the runner instances."
-  default     = "n2-standard-16"
+  default     = "n1-standard-16"
 }
 
 variable "runner_concurrency" {
