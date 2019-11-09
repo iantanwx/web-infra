@@ -11,7 +11,7 @@ resource "google_compute_instance" "runner_privileged" {
   boot_disk {
     initialize_params {
       image = "gce-uefi-images/ubuntu-1804-lts"
-      size  = "10"
+      size  = "100"
       type  = "pd-standard"
     }
   }
@@ -34,8 +34,6 @@ $(lsb_release -cs) \
 stable"
 sudo apt-get update
 sudo apt-get install -y docker-ce=${var.docker_version}
-sudo groupadd docker
-sudo usermod -aG docker $USER
 
 echo "Installing GitLab Runner"
 curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
@@ -46,7 +44,7 @@ echo '${data.template_file.privileged_runner_config.rendered}' | sudo tee /tmp/r
 
 echo "Copying gcloud service account credentials"
 mkdir -p /etc/gcloud
-echo "${base64decode(google_service_account_key.runner_privileged_sa_key.private_key)}" | sudo tee /etc/gcloud/credentials.json 1>/dev/null
+echo '${base64decode(google_service_account_key.runner_privileged_sa_key.private_key)}' | sudo tee /etc/gcloud/credentials.json 1>/dev/null
 
 echo "Setting up docker login credentials"
 echo "${data.template_file.docker_credentials_helper.rendered}" | sudo tee /tmp/docker-creds.sh 1> /dev/null
