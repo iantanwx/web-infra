@@ -31,9 +31,9 @@ variable "docker_version" {
 }
 
 variable "docker_image" {
-  type = string
+  type        = string
   description = "Default docker image to use for runner jobs"
-  default = "gcr.io/arbitera-internal-9c7092e2/gitlab-runner:0.1.0"
+  default     = "gcr.io/arbitera-internal-9c7092e2/gitlab-runner:0.1.0"
 }
 
 variable "runner_privileged_count" {
@@ -78,7 +78,7 @@ variable "runner_concurrency" {
 }
 
 variable "runner_image" {
-  type = string
-  default = "docker:stable"
+  type        = string
+  default     = "docker:stable"
   description = "The runner image to use for builds"
 }

@@ -88,7 +88,7 @@ data "template_file" "privileged_runner_config" {
   template = file("${path.module}/files/config.tpl")
   vars = {
     runner_image = var.runner_image
-    privileged = true
+    privileged   = true
   }
 }
 
@@ -96,6 +96,6 @@ data "template_file" "docker_credentials_helper" {
   template = file("${path.module}/files/docker-creds.sh")
   vars = {
     runner_image = var.runner_image
-    privileged = true
+    privileged   = true
   }
 }

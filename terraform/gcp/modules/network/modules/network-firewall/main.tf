@@ -15,7 +15,7 @@ data "google_compute_subnetwork" "private_subnetwork" {
 locals {
   public              = "public"
   public_restricted   = "public-restricted"
-  ssh = "ssh"
+  ssh                 = "ssh"
   private             = "private"
   private_persistence = "private-persistence"
 }
@@ -85,7 +85,7 @@ resource "google_compute_firewall" "public_allow_ssh" {
 
   allow {
     protocol = "tcp"
-    ports = ["22"]
+    ports    = ["22"]
   }
 }
 

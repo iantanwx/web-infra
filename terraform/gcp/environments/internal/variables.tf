@@ -86,6 +86,6 @@ variable "oslogin_users" {
 }
 
 variable "gitlab_runner_token" {
-  type = string
+  type        = string
   description = "The GitLab runner token."
 }
