@@ -10,7 +10,8 @@ module "stg_app_vpc" {
 }
 
 resource "google_compute_network_peering" "stg-to-internal" {
-  name         = "internal-to-stg"
+  count        = var.internal_network == null ? 0 : 1
+  name         = "stg-to-internal"
   network      = module.stg_app_vpc.network
   peer_network = var.internal_network
 }

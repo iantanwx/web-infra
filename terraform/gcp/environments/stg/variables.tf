@@ -1,7 +1,31 @@
 variable "credentials" {
   type        = "string"
   description = "Path to the GCP credentials to be used for deploying this environment"
-  default     = "~/.config/gcloud/corpnavi-terraform-admin.json"
+  default     = "~/.config/gcloud/arbitera-tf-admin.json"
+}
+
+variable "billing_account" {
+  type        = "string"
+  description = "Billing account for the host project. Should not change."
+  default     = "01F5A6-4C955D-CD5E15"
+}
+
+variable "org_id" {
+  type        = "string"
+  description = "Arbitera top-level organisation ID. Should not change."
+  default     = "296410810676"
+}
+
+variable "region" {
+  type        = "string"
+  description = "Host project region"
+  default     = "asia-southeast1"
+}
+
+variable "tf_project_name" {
+  type        = "string"
+  description = "The name of the Terraform master project used to manage the host project"
+  default     = "arbitera-tf-admin"
 }
 
 variable "host_project_name" {
@@ -13,25 +37,7 @@ variable "host_project_name" {
 variable "internal_network" {
   type        = string
   description = "Self link of the internal vpc for peering"
-  default     = "https://www.googleapis.com/compute/v1/projects/arbitera-internal-9c7092e2/global/networks/arbitera-internal-network"
-}
-
-variable "billing_account" {
-  type        = "string"
-  description = "Billing account for the host project. Should not change."
-  default     = "01E24F-901626-0E053A"
-}
-
-variable "org_id" {
-  type        = "string"
-  description = "Arbitera top-level organisation ID. Should not change."
-  default     = "222608296210"
-}
-
-variable "region" {
-  type        = "string"
-  description = "Host project region"
-  default     = "asia-southeast1"
+  default     = null
 }
 
 variable "project_services" {

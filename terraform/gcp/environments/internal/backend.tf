@@ -1,7 +1,7 @@
 terraform {
   backend "gcs" {
-    credentials = "~/.config/gcloud/corpnavi-terraform-admin.json"
-    bucket      = "corpnavi-terraform-admin"
-    prefix      = "terraform/internal/state"
+    credentials = "~/.config/gcloud/arbitera-tf-admin.json"
+    bucket      = "arbitera-tf-admin"
+    prefix      = "terraform/stg/state"
   }
 }

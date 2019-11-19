@@ -1,6 +1,6 @@
 resource "google_storage_bucket" "arbitera-helm-repo" {
-  project = google_project.project.id
-  name = "arbitera-helm-repo"
+  project  = google_project.project.id
+  name     = "arbitera-helm-repo"
   location = "asia"
 
   versioning {
