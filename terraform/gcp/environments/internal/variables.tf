@@ -37,13 +37,13 @@ variable "host_project_name" {
 variable "stg_project_id" {
   type        = string
   description = "The project ID of arbitera-stg"
-  default     = "arbitera-stg-56516692"
+  default     = "arbitera-stg-f7c66e31"
 }
 
 variable "stg_network" {
   type        = string
   description = "Self link of the staging vpc for peering"
-  default     = "https://www.googleapis.com/compute/v1/projects/arbitera-stg-56516692/global/networks/arbitera-stg-network"
+  default     = "https://www.googleapis.com/compute/v1/projects/arbitera-stg-f7c66e31/global/networks/arbitera-stg-network"
 }
 
 variable "project_services" {

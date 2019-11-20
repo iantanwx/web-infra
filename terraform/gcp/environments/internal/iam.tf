@@ -1,6 +1,6 @@
 locals {
   oslogin_users = [
-    "user:ian@corpnavi.com",
+    "user:ian@arbitera.io",
     "serviceAccount:${module.gitlab_runner.privileged_sa}",
     "serviceAccount:${module.gitlab_runner.unprivileged_sa}"
   ]

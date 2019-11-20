@@ -2,6 +2,6 @@ terraform {
   backend "gcs" {
     credentials = "~/.config/gcloud/arbitera-tf-admin.json"
     bucket      = "arbitera-tf-admin"
-    prefix      = "terraform/stg/state"
+    prefix      = "terraform/internal/state"
   }
 }

@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "arbitera-helm-repo" {
-  project  = google_project.project.id
+  project  = google_project.project.project_id
   name     = "arbitera-helm-repo"
   location = "asia"
 
