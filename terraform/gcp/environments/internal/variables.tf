@@ -46,6 +46,12 @@ variable "stg_network" {
   default     = "https://www.googleapis.com/compute/v1/projects/arbitera-stg-f7c66e31/global/networks/arbitera-stg-network"
 }
 
+variable "stg_gke_sa" {
+  type        = string
+  description = "Email of the staging GKE service account"
+  default     = "arbitera-stg-sa@arbitera-stg-f7c66e31.iam.gserviceaccount.com"
+}
+
 variable "project_services" {
   type        = list(string)
   description = "The services and APIs to enable for the host project. Defaults to minimal viable set for an Arbitera app environment."

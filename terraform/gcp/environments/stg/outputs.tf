@@ -18,6 +18,11 @@ output "k8s_admin_sa" {
   value = google_service_account.k8s_admin.account_id
 }
 
+output "k8s_cluster_sa" {
+  description = "The service account attached to GKE cluster nodes"
+  value       = module.gke_service_account.email
+}
+
 output "cluster_endpoint" {
   description = "The IP address of the cluster master."
   sensitive   = true

@@ -14,10 +14,8 @@ resource "google_service_account" "k8s_admin" {
   display_name = "Kubernetes administrator"
 }
 
-resource "google_project_iam_binding" "k8s_admin" {
+resource "google_project_iam_member" "k8s_admin" {
   project = google_project.project.project_id
-  members = [
-    "serviceAccount:${google_service_account.k8s_admin.email}"
-  ]
-  role = "roles/container.admin"
+  role    = "roles/container.admin"
+  member  = "serviceAccount:${google_service_account.k8s_admin.email}"
 }
