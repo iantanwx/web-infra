@@ -21,6 +21,7 @@ provider "helm" {
   enable_tls = false
 
   kubernetes {
+    load_config_file       = false
     host                   = module.gke_cluster.endpoint
     token                  = data.google_client_config.current.access_token
     client_certificate     = module.gke_cluster.client_certificate

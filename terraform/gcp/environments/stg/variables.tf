@@ -1,35 +1,35 @@
 variable "credentials" {
-  type        = "string"
+  type        = string
   description = "Path to the GCP credentials to be used for deploying this environment"
   default     = "~/.config/gcloud/arbitera-tf-admin.json"
 }
 
 variable "billing_account" {
-  type        = "string"
+  type        = string
   description = "Billing account for the host project. Should not change."
   default     = "01F5A6-4C955D-CD5E15"
 }
 
 variable "org_id" {
-  type        = "string"
+  type        = string
   description = "Arbitera top-level organisation ID. Should not change."
   default     = "296410810676"
 }
 
 variable "region" {
-  type        = "string"
+  type        = string
   description = "Host project region"
   default     = "asia-southeast1"
 }
 
 variable "tf_project_name" {
-  type        = "string"
+  type        = string
   description = "The name of the Terraform master project used to manage the host project"
   default     = "arbitera-tf-admin"
 }
 
 variable "host_project_name" {
-  type        = "string"
+  type        = string
   description = "The name of the host project"
   default     = "arbitera-stg"
 }
@@ -65,13 +65,13 @@ variable "public_restricted_whitelist" {
 }
 
 variable "vpc_cidr_primary" {
-  type        = "string"
+  type        = string
   description = "The CIDR block for the VPC secondary range. Must not overlap with internal or prod subnet range."
   default     = "10.4.0.0/16"
 }
 
 variable "vpc_cidr_secondary" {
-  type        = "string"
+  type        = string
   description = "The CIDR block for the VPC secondary range. Must not overlap with internal or prod subnet range."
   default     = "10.5.0.0/16"
 }
@@ -86,7 +86,7 @@ variable "oslogin_users" {
 
 # k8s variables
 variable "cluster_name" {
-  type        = "string"
+  type        = string
   description = "Name of the GKE cluster"
   default     = "arbitera-k8s-stg"
 }
