@@ -50,7 +50,7 @@ resource "kubernetes_cluster_role_binding" "cluster_admin" {
   }
 
   subject {
-    api_group = ""
+    api_group = "rbac.authorization.k8s.io"
     kind      = "ServiceAccount"
     name      = kubernetes_service_account.tiller_service_account.metadata[0].name
     namespace = var.tiller_namespace
@@ -62,4 +62,5 @@ resource "kubernetes_cluster_role_binding" "cluster_admin" {
 resource "helm_release" "redis" {
   name  = "redis"
   chart = "stable/redis"
+  depends_on = [module.gke_cluster, google_container_node_pool.node_pool, module.gke_service_account]
 }
